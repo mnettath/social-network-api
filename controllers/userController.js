@@ -31,4 +31,39 @@ module.exports = {
       res.status(500).json(error);
     }
   },
+  // PUT to update a user by its _id
+  async updateUser(req, res) {
+    try {
+      const updatedUser = await User.findOneAndUpdate(
+        {
+          _id: req.params.userId,
+        },
+        // $set updated the document with the values in req.body
+        { $set: req.body },
+        // runValidators: ensures that any validation rules in Mongoose schema are applied during the update. If validation does not pass the update will be rejected
+        // new - returns updated object
+        { runValidators: true, new: true }
+      );
+      if (!updatedUser) {
+        return res.status(404).json({ message: "No user with that ID" });
+      }
+      res.json(updatedUser);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+  // DELETE a user by its _id
+  async deleteUser(req, res) {
+    try {
+      const deletedUser = await User.findOneAndDelete({
+        _id: req.params.userId,
+      });
+      if (!deletedUser) {
+        return res.status(404).json({ message: "No user with that ID" });
+      }
+      res.json(deletedUser);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
 };
