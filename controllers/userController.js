@@ -54,7 +54,7 @@ module.exports = {
   },
   // DELETE a user by its _id
   async deleteUser(req, res) {
-    try {
+    try { 
       const deletedUser = await User.findOneAndDelete({
         _id: req.params.userId,
       });
