@@ -1,6 +1,7 @@
 const { User } = require("../models");
 
 module.exports = {
+  // POST to add a new friend to a user's friend list
   async createFriend(req, res) {
     try {
       // This creates a new user
@@ -20,6 +21,24 @@ module.exports = {
       await primaryUser.save();
 
       res.json(newFriend);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+  // DELETE to remove a friend from a user's friend list
+  async deleteFriend(req, res) {
+    try {
+      const deletedFriend = await User.findOneAndDelete({
+        _id: req.params.friendId,
+      });
+      if (!deletedFriend) {
+        return res
+          .status(404)
+          .json({
+            message: "No friend with that ID. Failed to delete friend!",
+          });
+      }
+      res.json(deletedFriend);
     } catch (error) {
       res.status(500).json(error);
     }
