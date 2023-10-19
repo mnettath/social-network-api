@@ -22,6 +22,9 @@ router
   .delete(deleteThought);
 
 // http://localhost:3001/api/thoughts/:thoughtId/reactions
-router.route("/:thoughtId/reactions").post(createReaction);
+router
+  .route("/:thoughtId/reactions")
+  .post(createReaction)
+  .delete(deleteReaction);
 
 module.exports = router;

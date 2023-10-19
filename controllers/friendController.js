@@ -32,11 +32,9 @@ module.exports = {
         _id: req.params.friendId,
       });
       if (!deletedFriend) {
-        return res
-          .status(404)
-          .json({
-            message: "No friend with that ID. Failed to delete friend!",
-          });
+        return res.status(404).json({
+          message: "No friend with that ID. Failed to delete friend!",
+        });
       }
       res.json(deletedFriend);
     } catch (error) {
