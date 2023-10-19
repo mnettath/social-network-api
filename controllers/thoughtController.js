@@ -47,4 +47,41 @@ module.exports = {
       res.status(500).json(error);
     }
   },
+  // PUT to update a thought by its ID
+  async updateThought(req, res) {
+    try {
+      const updatedThought = await Thought.findOneAndUpdate(
+        {
+          _id: req.params.thoughtId,
+        },
+        // $set updated the document with values in the req.body
+        { $set: req.body },
+        { new: true } // return the updated thought
+      );
+      if (!updatedThought) {
+        return res.status(404).json({
+          message: "No user found with that ID. Failed to update thought!",
+        });
+      }
+      res.json(updatedThought);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+  // DELETE a thought by its _id
+  async deleteThought(req, res) {
+    try {
+      const deletedThought = await Thought.findOneAndDelete({
+        _id: req.params.thoughtId,
+      });
+      if (!deletedThought) {
+        return res
+          .status(404)
+          .json({ message: "No thought with that ID. Unable to delete!" });
+      }
+      res.json(deletedThought);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
 };

@@ -59,7 +59,7 @@ module.exports = {
         _id: req.params.userId,
       });
       if (!deletedUser) {
-        return res.status(404).json({ message: "No user with that ID" });
+        return res.status(404).json({ message: "No user with that ID. Unable to delete!" });
       }
       res.json(deletedUser);
     } catch (error) {
