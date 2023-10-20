@@ -10,7 +10,7 @@ In order to use this social-network-api, the user must install node.js. Node.js 
 
 ## Usage
 
-Please see the following usage demonstration:
+Please see the following usage demonstration: https://drive.google.com/file/d/1rUZ0UCKnh48Iid4WfRbDtrdCD6qdHgXB/view
 
 ## Credits
 
