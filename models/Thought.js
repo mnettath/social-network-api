@@ -18,7 +18,9 @@ const thoughtSchema = new Schema(
   {
     toJSON: {
       virtuals: true,
-      id: false,
+      transform: (doc, ret) => {
+        delete ret.id;
+      },
     },
   }
 );
