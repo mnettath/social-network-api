@@ -26,7 +26,12 @@ module.exports = {
   async createUser(req, res) {
     try {
       const newUserData = await User.create(req.body);
-      res.json(newUserData);
+
+      const reorderUserData = {
+        _id: newUserData._id,
+        ...newUserData.toObject(),
+      };
+      res.json(reorderUserData);
     } catch (error) {
       res.status(500).json(error);
     }
@@ -54,12 +59,14 @@ module.exports = {
   },
   // DELETE a user by its _id
   async deleteUser(req, res) {
-    try { 
+    try {
       const deletedUser = await User.findOneAndDelete({
         _id: req.params.userId,
       });
       if (!deletedUser) {
-        return res.status(404).json({ message: "No user with that ID. Unable to delete!" });
+        return res
+          .status(404)
+          .json({ message: "No user with that ID. Unable to delete!" });
       }
       res.json(deletedUser);
     } catch (error) {

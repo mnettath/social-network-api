@@ -42,14 +42,14 @@ module.exports = {
         });
       }
 
+      // they will provide the reactionId they wish to remove in the req.body
       const deletedReaction = {
         _id: req.body.reactionId,
       };
 
-      // they will provide the reactionId they wish to remove in the req.body
       primaryThought.reactions.splice(deletedReaction, 1);
       await primaryThought.save();
-      res.json(deletedReaction);
+      res.json(primaryThought);
     } catch (error) {
       console.log(error);
       res.status(500).json(error);
