@@ -21,6 +21,7 @@ const thoughtSchema = new Schema(
       transform: (doc, ret) => {
         delete ret.id;
       },
+      getters: true,
     },
   }
 );
